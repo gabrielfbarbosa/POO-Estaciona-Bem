@@ -6,6 +6,6 @@ package com.mycompany.app;
 public class App {
 
     public static void main(String[] args) {
-        System.out.println("Salvee!");
+        System.out.println("Criar tudoa para primeira entrega do dia 29/04/2024!");
     }
 }
