@@ -49,7 +49,9 @@ public class Estacionamento {
        vagas.add(vaga2);
        disponiveis.add(vaga2);
        
-       
+       /*Criação de tarifas de cada dia padrão, tendo apenas um posição para cada dia,
+       DiaDaSemana possui uma string que é do dia, 4 valores double que são 2 valores para moto e 2 para carro, inicialializados com um valor
+       padrão para que o usuário não precise criar 1 por 1, caso haja alterações é possivel se fazer*/
        DiaDaSemana[] dias = new DiaDaSemana[7];
        dias[0] = new DiaDaSemana("Domingo");
        dias[1] = new DiaDaSemana("Segunda");
@@ -60,13 +62,14 @@ public class Estacionamento {
        dias[6] = new DiaDaSemana("Sabado");
        
        
+       /*O menu principal será mostrado até o usuário pedir para sair*/
        boolean sair=false;
        
        while(sair == false){
            opPrimaria = menu.menuPrincipal();
            
            switch(opPrimaria){
-               
+/*===============================================1 - Gerenciar clientes===============================================*/
                 case 1:
                    opSecundaria = menu.menuGerenciarClientes();
                    if(opSecundaria == 1){
@@ -89,7 +92,7 @@ public class Estacionamento {
                    break;
                    
                 case 2:
-                   
+/*===============================================2 - Gerenciar vagas===============================================*/                   
                    opSecundaria = menu.menuGerenciarVagas();
                    if(opSecundaria == 1){
                        funcao.cadastrarVaga(vagas, disponiveis);
@@ -107,8 +110,9 @@ public class Estacionamento {
                        JOptionPane.showMessageDialog(null, "Opção Inválida!", "Estaciona Bem", JOptionPane.ERROR_MESSAGE);
                    }
                    break;
+
                 case 3:
-                   
+/*===============================================3 - Gerenciar estacionamento===============================================*/                    
                     if(clientes.size() > 0 && vagas.size() > 0){
                         opSecundaria = menu.menuGerenciarEstacionamento();
                         if(opSecundaria == 1){
@@ -131,10 +135,12 @@ public class Estacionamento {
                    break;
                    
                 case 4:
-                   /*não entendi oq fazer*/
+/*===============================================4 - Cadastros gerais===============================================*/                    
+                    /*não entendi oq fazer*/
                    break;
                    
                 case 5:
+/*===============================================5 - Consultar total faturado em um período===============================================*/
                     if(tarifas.size() > 0){
                         funcao.consultaTotalFaturado(tarifas);
                     } else{

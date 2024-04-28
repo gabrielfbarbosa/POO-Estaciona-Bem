@@ -18,7 +18,10 @@ import javax.swing.JOptionPane;
  */
 public class OperacoesEstacionamento {
     
-    /*1- Cadastrar Clientes================================*/
+/*================================1- Cadastrar Clientes================================*/
+    /*A função vai listar todos os clientes cadastrados, vai pedir um documento para novo cadastro e procurar se ele já se encontra
+    no ArrayList clientes(Verficado pelo buscaCliente que retorna o objeto inteiro que possui esse docuemtno), se não possuir é feito 
+    a coleta dos outros dados e realizado o cadastro*/
     public void cadastrarCliente(ArrayList<Cliente> clientes){ 
 
         listaCadastros(clientes);
@@ -29,7 +32,8 @@ public class OperacoesEstacionamento {
             String nome = JOptionPane.showInputDialog(null, "Digite o nome do cliente", "Fulano de Tal");
             String placa = JOptionPane.showInputDialog(null, "Digite a placa do veículo do cliente:", "Placa X");
             String tipo = JOptionPane.showInputDialog(null, "Digite o tipo do veículo do cliente:", "Moto ou Carro");
-            //Laço de cadastro de veiculos
+            
+            /*Verifica se o tipo é Moto ou Carro, se for o cadastro é feito e o cliente é adicionado no Array, caso contrário volta uma mensagem de erro*/
             if(tipo.equals("Moto") || tipo.equals("Carro")){
                 ArrayList<Veiculo> veiculos = new ArrayList<Veiculo>();
                 Veiculo veiculo = new Veiculo(placa, cliente);
@@ -51,14 +55,19 @@ public class OperacoesEstacionamento {
     
     
     /*2- Consultar documento de Clientes================================*/
+    /*Lista todos os clientes para facilitar a escolha, pede um documento e verifica se esse existe no ArrayList(Verificado por buscaCliente), caso existir
+    é retornado as informações do cliente através do método toString feito na classe cliente*/
     public void consultarDocumento(ArrayList<Cliente> clientes){
         listaCadastros(clientes);
+        
+        /*Caso não exista clientes cadastros não é feito a funcionalidade e devolve uma mensagem de erro*/
         if(clientes.size() > 0){
             Cliente cliente;
         
             String documento = JOptionPane.showInputDialog(null, "Digite o documento do cliente", "Numero do Documento");
             cliente = buscaCliente(clientes, documento);
-
+            
+            /*verifica cliente cadastrado*/
             if(cliente != null){
                 JOptionPane.showMessageDialog(null, cliente.toString(), "Estaciona Bem", JOptionPane.INFORMATION_MESSAGE);
             } else{
@@ -73,6 +82,9 @@ public class OperacoesEstacionamento {
     
     
     /*3- Excluir Clientes================================*/
+    /*O usuário informa um documento, caso ele exista no ArrayList de clientes(verificado por buscaCliente), ele é excluido no ArrayList de clientes, com uso
+    do método .remove(object o), não podendo excluir clientes com tickets cadastrados que é verificado pelo método buscaClienteTicket que retorna true caso encontre
+    ou false se não tiver nenhum ticket*/
     public void excluirCliente(ArrayList<Cliente> clientes, ArrayList<Ticket> tickets){
         listaCadastros(clientes);
         if(clientes.size() > 0){
@@ -82,9 +94,11 @@ public class OperacoesEstacionamento {
             cliente = buscaCliente(clientes, documento);
 
             boolean ticketCadastrado = buscaClienteTicket(tickets, documento);
+            /*verifica cliente cadastrado*/
             if(cliente == null){
                 JOptionPane.showMessageDialog(null, "Documento não encontrado!!", "Estaciona Bem", JOptionPane.ERROR_MESSAGE);
-                
+            
+            /*verifica ticket cadastrado com esse cliente*/    
             } else if(ticketCadastrado){
                 JOptionPane.showMessageDialog(null, "Não é possível remover o Cliente, ele ainda possui Ticket Ativado", "Estaciona Bem", JOptionPane.ERROR_MESSAGE);
             } else{
@@ -98,6 +112,9 @@ public class OperacoesEstacionamento {
     }
     
     /*4 - Editar================================*/
+    /*busca um documento dado pelo usuário, se existir o sistema verá qual o dado que o usuário vai desejar alterar usando caixas de textos
+    com opções de sim ou não na pergunta se ele quer alterar tal campo, caso ele queira o programa vai ler o novo valor e alterar o objeto
+    correspondente, não podendo alterar clientes que possuem tickets cadastrados*/
     public void editarCliente(ArrayList<Cliente> clientes, ArrayList<Ticket> tickets){
         listaCadastros(clientes);
         if(clientes.size() > 0){
@@ -108,9 +125,11 @@ public class OperacoesEstacionamento {
 
             boolean ticketCadastrado = buscaClienteTicket(tickets, documento);
             
+            /*verifica cliente cadastrado*/
             if(cliente == null){
                 JOptionPane.showMessageDialog(null, "Documento não encontrado!!", "Estaciona Bem", JOptionPane.ERROR_MESSAGE);                
             
+            /*verifica ticket cadastrado com esse cliente*/
             } else if(ticketCadastrado){
                 JOptionPane.showMessageDialog(null, "Não é possível editar o Cliente, ele ainda possui Ticket Ativado!!", "Estaciona Bem", JOptionPane.ERROR_MESSAGE);                                
             
@@ -118,6 +137,7 @@ public class OperacoesEstacionamento {
                JOptionPane.showMessageDialog(null, cliente.toString());
                 int alteracao = JOptionPane.showConfirmDialog(null, "Deseja alterar o nome do cliente? ", "Alterar Cliente",JOptionPane.YES_NO_OPTION);
 
+                /*verifica se vai alterar nome*/
                 if(alteracao == JOptionPane.YES_OPTION){
                     String nome = JOptionPane.showInputDialog(null, "Digite o novo nome do cliente: ", "Fulano de Tal");
                     cliente.setNome(nome);
@@ -125,6 +145,7 @@ public class OperacoesEstacionamento {
 
                 alteracao = JOptionPane.showConfirmDialog(null, "Deseja alterar o documento do cliente? ", "Alterar Cliente",JOptionPane.YES_NO_OPTION);
 
+                /*verifica se vai alterar documento*/
                 if(alteracao == JOptionPane.YES_OPTION){
                     documento = JOptionPane.showInputDialog(null, "Digite o novo documento do cliente: ", "Novo Documento");
                     cliente.setDocumento(documento);
@@ -132,6 +153,7 @@ public class OperacoesEstacionamento {
 
                 alteracao = JOptionPane.showConfirmDialog(null, "Deseja alterar os veiculos do cliente? ", "Alterar Cliente",JOptionPane.YES_NO_OPTION);
 
+                /*verifica se vai alterar veiculos do cliente*/
                 if(alteracao == JOptionPane.YES_OPTION){
                     JOptionPane.showMessageDialog(null, "Escolha a opcao 5- Gerenciar veículos, do menu de clientes", "Estaciona Bem",JOptionPane.INFORMATION_MESSAGE);
                 }
@@ -147,7 +169,8 @@ public class OperacoesEstacionamento {
     }
 
     /*5 - Gerenciar veículos================================*/
-    
+    /*Possui verificações parecidas com as anteriores, quando passar por elas vai abrir um menu próprio para área dos veiculos
+    podendo cadastrar, remover se houver mais de 2 veiculos e alterar, caso eles não estejam cadastrados em tickets */
     public void gerenciarVeiculos(ArrayList<Cliente> clientes, ArrayList<Ticket> tickets){
         if(clientes.size() > 0){
             Cliente cliente;
@@ -163,7 +186,7 @@ public class OperacoesEstacionamento {
                 int op = menu.menuGerenciarVeiculos();
                 switch(op){
                     case 1:
-                        cadastrarVeiculo(cliente);
+                        cadastrarVeiculo(clientes, cliente);
                         break;
                     case 2:
                         removerVeiculo(cliente, tickets);
@@ -212,18 +235,28 @@ public class OperacoesEstacionamento {
     
     
 /*----------------------------------Operações - veiculos--------------------------------------------------*/  
-public void cadastrarVeiculo(Cliente cliente){
-        Veiculo veiculoCadastrado;
+    /*Realiza cadastros de novos veiculos no nome do cliente, verificando se já existe a placa cadastrada para todos os clientes, usando
+    buscaVeiculo dentro de um laço que percorre todos os clientes, a função verifica se tem algum veiculo com a mesma placa caso houver
+    ela retorna o objeto com a mesma placa*/
+    public void cadastrarVeiculo(ArrayList<Cliente> clientes, Cliente cliente){
+        Veiculo veiculoCadastrado=null;
         
         int continuar = JOptionPane.YES_OPTION;
         while(continuar == JOptionPane.YES_OPTION){
             JOptionPane.showMessageDialog(null, cliente.listaVeiculos(), "Lista de Veiculos", JOptionPane.INFORMATION_MESSAGE);
             String tipo = JOptionPane.showInputDialog(null, "Digite o tipo do veiculo", "Moto ou Carro");
             String placa = JOptionPane.showInputDialog(null, "Digite a Placa do veiculo", "Placa X");
-            veiculoCadastrado = cliente.buscaVeiculo(placa);
+            
+            /*verifica se já existe a placa cadastrada para todos os veiculos*/
+            for(Cliente c1: clientes){
+                if(c1.buscaVeiculo(placa).equals(placa)){
+                    veiculoCadastrado = cliente.buscaVeiculo(placa);
+                }
+            }
             
             if(veiculoCadastrado == null){
                 Veiculo novoVeiculo;
+                /*verifica o tipo do veiculo*/
                 if(tipo.equals("Moto")){
                     novoVeiculo = new Veiculo(placa, cliente, true);
                 } else if (tipo.equals("Carro")){
@@ -242,7 +275,8 @@ public void cadastrarVeiculo(Cliente cliente){
         }
         
     }
-    
+    /*Remove o veiculo se encontrar a sua placa dentro o ArrayList de veiculos do cliente e se ele não possuir ticket ativado, o programa vai 
+    rodar até o usuário não querer mais excluir ou se cliente tiver apenas um veiculo*/
     public void removerVeiculo(Cliente cliente, ArrayList<Ticket> tickets){
     Veiculo veiculoCadastrado;
         
@@ -254,13 +288,16 @@ public void cadastrarVeiculo(Cliente cliente){
             
             boolean ticketCadastrado = buscaPlacaTicket(tickets, placa);
             
+            /*verifica se existe a placa no ArrayList de veiculos do cliente*/
             if(veiculoCadastrado == null){
                 JOptionPane.showMessageDialog(null, "Placa não encontrada!!", "Gerenciar Veiculos", JOptionPane.ERROR_MESSAGE);
-                
+             
+            /*verifica se o veiculo ainda possui ticket ativado*/    
             } else if(ticketCadastrado){
                JOptionPane.showMessageDialog(null, "Não é possível remover Veiculo, ele ainda possui Ticket Ativado!!", "Gerenciar Veiculos", JOptionPane.ERROR_MESSAGE);
             
             } else{
+                /*Remove o veiculo cadastrado do ArrayList*/
                 cliente.removeVeiculo(veiculoCadastrado);
                 JOptionPane.showMessageDialog(null, "Veículo Excluído com sucesso!!", "Gerenciar Veiculos", JOptionPane.INFORMATION_MESSAGE);
             
@@ -272,6 +309,8 @@ public void cadastrarVeiculo(Cliente cliente){
         
     }
                 
+    /*Procura pelo veiculo no ArrayList de veiculos do cliente, se encontrar o programa pede para informar qual o dado que será alterado
+    O pograma vai fazer alterações até o usuário definir que não quer mais alterar*/
     public void alterarVeiculo(Cliente cliente, ArrayList<Ticket> tickets){
 
         int alteracao = JOptionPane.YES_OPTION;
@@ -282,9 +321,11 @@ public void cadastrarVeiculo(Cliente cliente){
             Veiculo veiculo = cliente.buscaVeiculo(placa);
 
             boolean ticketCadastrado = buscaPlacaTicket(tickets, placa);
+            /*verifica se existe a placa no ArrayList de veiculos do cliente*/
             if(veiculo == null){
                 JOptionPane.showMessageDialog(null, "Placa não encontrada!!", "Gerenciar Veiculos", JOptionPane.ERROR_MESSAGE);
-                
+            
+            /*verifica se o veiculo possui ticket ativo*/    
             } else if(ticketCadastrado){
                JOptionPane.showMessageDialog(null, "Não é possível remover Veiculo, ele ainda possui Ticket Ativado!!", "Gerenciar Veiculos", JOptionPane.ERROR_MESSAGE);
             
@@ -319,7 +360,9 @@ public void cadastrarVeiculo(Cliente cliente){
     
     
 /*============================Operações 2- Vagas====================================*/
-    
+    /*É feito o cadastros das vagas que nao possuirem a mesma combinação de rua e numero, sendo validado pelo buscaVaga
+    se for encontrado a mesma combinação no ArrayList de vagas o método retorna o objeto encontrado, se ele for null então o cadastro
+    é feito*/
     /*1 - Cadastrar Vaga================================*/
     public void cadastrarVaga(ArrayList<Vaga> vagas, ArrayList<Vaga> disponiveis){ 
 
@@ -330,8 +373,11 @@ public void cadastrarVeiculo(Cliente cliente){
             String rua = JOptionPane.showInputDialog(null, "Digite o nome da rua da vaga que queira cadastrar:", "Rua Tal");
             Vaga vaga = buscaVaga(vagas, numero, rua);
 
+            /*verifica se existe a vaga no ArrayList de vagas*/
             if(vaga == null){
                 String tipo = JOptionPane.showInputDialog(null, "Digite o tipo da nova vaga", "Moto ou Carro");
+                
+                /*verifica o tipo da vaga*/
                 if(tipo.equals("Moto")){
                     Vaga novaVaga = new Vaga(numero, rua, true);
                     vagas.add(novaVaga);
@@ -351,7 +397,7 @@ public void cadastrarVeiculo(Cliente cliente){
             continuar = JOptionPane.showConfirmDialog(null, "Deseja cadastrar mais alguma vaga? ", "Cadastrar Vaga",JOptionPane.YES_NO_OPTION);
         }
     }
-    
+    /*Retornará as informações da vaga caso ela exista no ArrayList da vagas*/
     /*2 - Consultar por número================================*/
     public void consultarVaga(ArrayList<Vaga> vagas){
         Vaga vaga;
@@ -360,6 +406,7 @@ public void cadastrarVeiculo(Cliente cliente){
         String rua = JOptionPane.showInputDialog(null, "Digite a Rua da vaga: ", "Rua Tal");
         vaga = buscaVaga(vagas, numero, rua);
         
+        /*verifica se existe a vaga no ArrayList de vagas*/
         if(vaga != null){
             JOptionPane.showMessageDialog(null, vaga.toString(), "Estaciona Bem", JOptionPane.INFORMATION_MESSAGE);
         } else{
@@ -369,6 +416,8 @@ public void cadastrarVeiculo(Cliente cliente){
     }
     
     /*3 - Excluir Vaga================================*/
+    /*Exclui a vaga caso o usuário informe uma combinação de rua e numero de vaga que esteja dentro do ArrayList de vagas,
+    essa vaga nao pode ter ticket ativo, se tiver não é feito a exclusão*/
     public void excluirVaga(ArrayList<Vaga> vagas, ArrayList<Vaga> disponiveis, ArrayList<Vaga> indisponiveis, ArrayList<Vaga> ocupadas,ArrayList<Ticket> tickets){
         Vaga vaga;
         JOptionPane.showMessageDialog(null, listaVagas(vagas));
@@ -377,9 +426,11 @@ public void cadastrarVeiculo(Cliente cliente){
         vaga = buscaVaga(vagas, numero, rua);
         
         boolean ticketCadastrado = buscaVagaTicket(tickets, rua, numero);
+        /*verifica se existe a vaga no ArrayList de vagas*/
         if(vaga == null){
             JOptionPane.showMessageDialog(null, "Combinação de Rua e numero não encontrada!!", "Estaciona Bem", JOptionPane.ERROR_MESSAGE);
-            
+        
+        /*verifica se a vaga esta ocupada*/
         } else if(ticketCadastrado){
             JOptionPane.showMessageDialog(null, "Não é possível remover Vaga, ele ainda possui Ticket Ativado!!", "Gerenciar Veiculos", JOptionPane.ERROR_MESSAGE);            
         } else{
@@ -405,6 +456,8 @@ public void cadastrarVeiculo(Cliente cliente){
     }
 
     /*4 - Editar Vaga================================*/
+    /*Edita a vaga caso o usuário informe uma combinação de rua e numero de vaga que esteja dentro do ArrayList de vagas,
+    essa vaga nao pode ter ticket ativo, se tiver não é feito a edição, é feitas perguntas  para qual dado o usuário vai querer alterar*/
     public void editarVaga(ArrayList<Vaga> vagas, ArrayList<Vaga> disponiveis, ArrayList<Vaga> indisponiveis, ArrayList<Vaga> ocupadas,ArrayList<Ticket> tickets){
         Vaga vaga, alteraOutros;
         JOptionPane.showMessageDialog(null, listaVagas(vagas));
@@ -414,20 +467,28 @@ public void cadastrarVeiculo(Cliente cliente){
         
         vaga = buscaVaga(vagas, numero, rua);
         boolean ticketCadastrado = buscaVagaTicket(tickets, rua, numero);
+        /*Verifica se existe a vaga*/
         if(vaga == null){
             JOptionPane.showMessageDialog(null, "Combinação de Rua e numero não encontrada!!", "Estaciona Bem", JOptionPane.ERROR_MESSAGE);
-            
+        
+        /*Verifica se existe ticket ativo*/    
         } else if(ticketCadastrado){
-            JOptionPane.showMessageDialog(null, "Não é possível remover Vaga, ele ainda possui Ticket Ativado!!", "Gerenciar Veiculos", JOptionPane.ERROR_MESSAGE);            
+            JOptionPane.showMessageDialog(null, "Não é possível Alterar Vaga, ele ainda possui Ticket Ativado!!", "Gerenciar Veiculos", JOptionPane.ERROR_MESSAGE);            
         } else{
             JOptionPane.showMessageDialog(null, vaga.toString());
+            
+            /*variavel usada para altearar outros ArrayList, ocupadas, disponiveis e indisponives, para que não haja incosistencia de dados*/
             alteraOutros = buscaVaga(disponiveis, numero, rua);
             if(alteraOutros == null){
                 alteraOutros = buscaVaga(indisponiveis, numero, rua);
             }
             int alteracao = JOptionPane.showConfirmDialog(null, "Deseja alterar o tipo da vaga? ", "Alterar Vaga",JOptionPane.YES_NO_OPTION);
+            
+            /*Verifica se vai alterar o tipo da vaga*/
             if(alteracao == JOptionPane.YES_OPTION){
                 String tipo = JOptionPane.showInputDialog(null, "Digite o novo tipo de vaga: ", "Moto ou Carro");
+                
+                /*Verifica o tipo da vaga*/
                 if(tipo.equals("Moto") || tipo.equals("Carro")){
                     vaga.setTipo(tipo);
                     alteraOutros.setTipo(tipo);
@@ -437,16 +498,19 @@ public void cadastrarVeiculo(Cliente cliente){
             }
             
             alteracao = JOptionPane.showConfirmDialog(null, "Deseja alterar o numero? ", "Alterar Vaga",JOptionPane.YES_NO_OPTION);
+            /*Verifica se vai alterar o numero da vaga*/
             if(alteracao == JOptionPane.YES_OPTION){
                 numero = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o novo numero da vaga: ", "123456789"));
             }
             
             alteracao = JOptionPane.showConfirmDialog(null, "Deseja alterar a Rua da vaga? ", "Alterar Vaga",JOptionPane.YES_NO_OPTION);
+            /*Verifica se vai alterar a rua da vaga*/
             if(alteracao == JOptionPane.YES_OPTION){
                 rua = JOptionPane.showInputDialog(null, "Digite a Rua da vaga que queira excluir", "Rua Tal");
             }
             
             vaga = buscaVaga(vagas, numero, rua);
+            /*Verifica se a nova alteração não é igual a anterior*/
             if(vaga != null){
                 JOptionPane.showMessageDialog(null, "Combinação de numero e rua já cadastrado!!", "Estaciona Bem", JOptionPane.ERROR_MESSAGE);
             } else{
@@ -463,8 +527,7 @@ public void cadastrarVeiculo(Cliente cliente){
     
     
     /*5- Alterar Disponibilidade================================*/
-    
-    
+    /*Ele vai usar do método alteraDisponibilidade que explico a funcionalidade dele logo a baixo, fará verificações padrões e alterará a disponibilidade*/
     public void operacaoAlteraDisponibilidade(ArrayList<Vaga> vagas, ArrayList<Vaga> disponiveis, ArrayList<Vaga> indisponiveis, ArrayList<Vaga> ocupadas, ArrayList<Ticket> tickets){
         Vaga vaga;
         boolean verificador;
@@ -475,15 +538,19 @@ public void cadastrarVeiculo(Cliente cliente){
         
         vaga = buscaVaga(vagas, numero, rua);
         boolean ticketCadastrado = buscaVagaTicket(tickets, rua, numero);
+        
+        /*Verifica se existe a vaga*/
         if(vaga == null){
             JOptionPane.showMessageDialog(null, "Combinação de Rua e numero não encontrada!!", "Estaciona Bem", JOptionPane.ERROR_MESSAGE);
-            
+         
+        /*Verifica se a vaga não possui ticket ativo*/
         } else if(ticketCadastrado){
             JOptionPane.showMessageDialog(null, "Não é possível alterar a disponibilidade da Vaga, ela ainda possui Ticket Ativado!!", "Gerenciar Veiculos", JOptionPane.ERROR_MESSAGE);            
         } else{
             String disponibilidade = JOptionPane.showInputDialog(null, "Digite uma nova disponibilidade: ");
             verificador = alteraDisponibilidade(vagas, disponiveis, indisponiveis, ocupadas, vaga, disponibilidade);
             
+            /*Caso retorne true a vaga foi alterada se não a disponibilidade é igual*/
             if(verificador){
                 JOptionPane.showMessageDialog(null, "Disponibilidade de Vaga Alterada", "Estaciona Bem", JOptionPane.INFORMATION_MESSAGE);
             } else{
@@ -492,31 +559,36 @@ public void cadastrarVeiculo(Cliente cliente){
         }
     }
     
-    /*Vou usar para ocupar ela nos ticket e desocupar*/
+    /*o metodo recebe varias ArrayList para que possa migrar de um para outro, removendo de um e adicionando de outro, cada ArrayList
+    representa uma disponibilidade, então a vaga vai ser alterada nas vagas mudando seu campo disponibilidade e depois vai mudar de ArrayList*/
     public boolean alteraDisponibilidade(ArrayList<Vaga> vagas, ArrayList<Vaga> disponiveis, ArrayList<Vaga> ocupadas, ArrayList<Vaga> indisponiveis, Vaga vaga, String disponibilidade){
         
 
-        if(!disponibilidade.equals(vaga.getDisponibilidade())){
-            
-            if(vaga.getDisponibilidade().equals("disponivel")){
-                disponiveis.remove(vaga);
-            }   else if(vaga.getDisponibilidade().equals("indisponivel")){
-                indisponiveis.remove(vaga);
-            } else if(vaga.getDisponibilidade().equals("ocupada")){
-                ocupadas.remove(vaga);
-            }
-            
-            vaga.setDisponibilidade(disponibilidade);
-            if(disponibilidade.equals("disponivel")){
-                disponiveis.add(vaga);
-            } else if(disponibilidade.equals("indisponivel")){
-                indisponiveis.add(vaga);
-            } else if(disponibilidade.equals("ocupada")){
-                ocupadas.add(vaga);
-            } 
-            return true;
+        /*Caso seja a mesma disponibilidade nada é feito */
+        if(disponibilidade.equals(vaga.getDisponibilidade())){
+            return false;
         }
-        return false;
+        
+        /*Caso contrário irá movimentar a vaga de um ArrayList para outro e vai trocar o seu campo disponibilidade*/
+        /*Removendo de um ArrayList*/
+        if(vaga.getDisponibilidade().equals("disponivel")){
+            disponiveis.remove(vaga);
+        }   else if(vaga.getDisponibilidade().equals("indisponivel")){
+            indisponiveis.remove(vaga);
+        } else if(vaga.getDisponibilidade().equals("ocupada")){
+            ocupadas.remove(vaga);
+        }
+
+        /*Adicionando em outro*/
+        vaga.setDisponibilidade(disponibilidade);
+        if(disponibilidade.equals("disponivel")){
+            disponiveis.add(vaga);
+        } else if(disponibilidade.equals("indisponivel")){
+            indisponiveis.add(vaga);
+        } else if(disponibilidade.equals("ocupada")){
+            ocupadas.add(vaga);
+        } 
+        return true;
     }
     
    
