@@ -26,16 +26,14 @@ public class Menus {
         
         entrada = JOptionPane.showInputDialog(null,menu, "numero de 1 a 6");
         
-        if(entrada != null){
             
-            if(entrada.matches("1") || entrada.matches("2") || entrada.matches("3") || entrada.matches("4") || entrada.matches("5") || entrada.matches("6")) {
-               
-                op = Integer.parseInt(entrada);
-            
-            } else {
-               
-                JOptionPane.showMessageDialog(null, "Por favor, insira apenas números.");
-            }
+        if(entrada.matches("1") || entrada.matches("2") || entrada.matches("3") || entrada.matches("4") || entrada.matches("5") || entrada.matches("6")) {
+
+            op = Integer.parseInt(entrada);
+
+        } else {
+
+            JOptionPane.showMessageDialog(null, "Por favor, insira apenas números.");
         }
         
         
