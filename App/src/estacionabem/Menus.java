@@ -2,13 +2,6 @@ package estacionabem;
 
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author BRENO TAKESHI CAMARGO DA SILVA MAEDA
- * @author GABRIEL FELIPE BARBOSA
- * 
- */
-
 public class Menus {
     
     public int menuPrincipal(){
