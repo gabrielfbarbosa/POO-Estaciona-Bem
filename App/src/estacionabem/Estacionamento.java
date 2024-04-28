@@ -1,5 +1,12 @@
 package estacionabem;
 
+/**
+ *
+ * @author BRENO TAKESHI CAMARGO DA SILVA MAEDA
+ * @author GABRIEL FELIPE BARBOSA
+ * 
+ */
+
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
