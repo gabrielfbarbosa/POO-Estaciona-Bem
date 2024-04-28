@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package estacionabem;
 
 import java.time.DayOfWeek;
@@ -12,10 +8,6 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author breno
- */
 public class OperacoesEstacionamento {
     
 /*================================1- Cadastrar Clientes================================*/
@@ -369,7 +361,7 @@ public class OperacoesEstacionamento {
         int continuar = JOptionPane.YES_OPTION;
         while(continuar == JOptionPane.YES_OPTION){
             JOptionPane.showMessageDialog(null, listaVagas(vagas));
-            int numero = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o numero da vaga que queira cadastrar:", "123456789"));
+            int numero = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o numero da vaga que queira cadastrar:", "123"));
             String rua = JOptionPane.showInputDialog(null, "Digite o nome da rua da vaga que queira cadastrar:", "Rua Tal");
             Vaga vaga = buscaVaga(vagas, numero, rua);
 
@@ -619,7 +611,7 @@ public class OperacoesEstacionamento {
         
         JOptionPane.showMessageDialog(null, listaVagas(disponiveis));
         
-        int numero = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o numero da vaga que queira estacionar", "123456789"));
+        int numero = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o numero da vaga que queira estacionar", "123"));
         String rua = JOptionPane.showInputDialog(null, "Digite a Rua da vaga que queira estacionar", "Rua Tal");
         
         vaga = buscaVaga(vagas, numero, rua);
@@ -673,7 +665,8 @@ public class OperacoesEstacionamento {
         } else{
             ticket.finalizaTicket();
             
-            DiaDaSemana dia = defineDia(ticket.getFim().getDayOfWeek().getValue(), dias);
+            DiaDaSemana dia;
+            dia = defineDia(ticket.getFim().getDayOfWeek().getValue(), dias);
             Tarifa tarifa = new Tarifa(ticket, dia);
             calculaTarifa(tarifa, dias);
             
@@ -848,24 +841,45 @@ public class OperacoesEstacionamento {
     
 /*============================Operações 4- Cadastros Geraias====================================*/     
     
-    
-    
-    
-    
-/*============================Operações 4- Cadastros Geraias====================================*/        
-
 
 /*------------------------------------------------------------------------------------*/  
 
     
 /*============================Operações 5- Consultar Total Faturado====================================*/     
     public void consultaTotalFaturado(ArrayList<Tarifa> tarifas){
-        JOptionPane.showMessageDialog(null, "Consultar total faturado dentre um período", "Estaciona Bem", JOptionPane.INFORMATION_MESSAGE);
-        String strInicio = JOptionPane.showInputDialog(null, "Digite o início do período: ", "DD-MM-AAAA");
-        String strFim = JOptionPane.showInputDialog(null, "Digite o fim do período: ", "DD-MM-AAAA");
         
-        LocalDate inicio = LocalDate.parse(strInicio, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        LocalDate fim = LocalDate.parse(strFim, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        String strInicio;
+        String strFim;
+        LocalDate inicio = null;
+        LocalDate fim = null;
+        
+        JOptionPane.showMessageDialog(null, "Consultar total faturado dentre um período", "Estaciona Bem", JOptionPane.INFORMATION_MESSAGE);
+        
+        do {
+            
+            strInicio = JOptionPane.showInputDialog(null, "Digite o início do período: ", "DD-MM-AAAA");
+            
+            if(!validarData(strInicio)) {
+                JOptionPane.showMessageDialog(null, "Insira uma data de Início no formato Dia/Mes/Ano");
+            }
+            
+        } while(!validarData(strInicio));
+        
+        
+        do {
+            
+            strFim = JOptionPane.showInputDialog(null, "Digite o fim do período: ", "DD-MM-AAAA");
+             
+            if(!validarData(strFim)) {
+                JOptionPane.showMessageDialog(null, "Insira uma data de Fim no formato Dia/Mes/Ano");
+            }
+            
+        } while(!validarData(strFim));
+        
+            
+        inicio = LocalDate.parse(strInicio, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            
+        fim = LocalDate.parse(strFim, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         
         double totalFaturado = 0;
         for(Tarifa tarifa : tarifas){
@@ -880,6 +894,10 @@ public class OperacoesEstacionamento {
         } else{
         JOptionPane.showMessageDialog(null, "Total da fatura entre " + strInicio + " e " + strFim + "\nR$ " + totalFaturado, "Estaciona Bem", JOptionPane.INFORMATION_MESSAGE);
         }
+    }
+    
+    private boolean validarData(String data) {
+        return data.matches("\\d{2}/\\d{2}/\\d{4}");
     }
     
 }

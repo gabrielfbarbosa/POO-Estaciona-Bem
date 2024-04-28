@@ -1,24 +1,19 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package estacionabem;
 
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author breno
- */
 public class Tarifa {
+    
     private DiaDaSemana diaSaida;
     private Ticket ticket;
     private long horasEstacionadas;
     private double valorTotal;
+    private static final DateTimeFormatter FORMATADOR_DATA_HORA = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
     
     public Tarifa(Ticket ticket, DiaDaSemana dia) {
@@ -26,9 +21,6 @@ public class Tarifa {
         this.ticket = ticket;    
     }
 
-    
-    
-    
     public DiaDaSemana buscaDia(DiaDaSemana[] diasDaSemana, String strDia){
         
         for(DiaDaSemana dia : diasDaSemana){
@@ -41,8 +33,8 @@ public class Tarifa {
 
     public String toString(){
             String saida="";
-            saida += "Dia da entrada: " + this.ticket.getInicio() + "\n";
-            saida += "Dia da saida: " + this.diaSaida + "\n";
+            saida += "Dia da entrada: " + FORMATADOR_DATA_HORA.format(this.ticket.getInicio()) + "\n";
+            saida += "Dia da saida: " + FORMATADOR_DATA_HORA.format(this.ticket.getFim()) + "\n";
             saida += "Horas estacionadas: " + this.horasEstacionadas + "\n";
             saida += "==================================\n";
             saida += "Total a pagar: " + this.valorTotal + "\n";
@@ -56,7 +48,6 @@ public class Tarifa {
     public void setValorTotal(double valorTotal) {
         this.valorTotal = valorTotal;
     }
-
 
     public DiaDaSemana getDiaSaida() {
         return diaSaida;

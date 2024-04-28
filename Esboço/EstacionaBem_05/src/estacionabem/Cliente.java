@@ -1,16 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package estacionabem;
 
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author breno
- */
 public class Cliente {
     
     private String nome;
@@ -23,7 +15,6 @@ public class Cliente {
         this.veiculos = veiculos;
     }
 
-    
     public void adicionaVeiculo(Veiculo veiculo){
         this.veiculos.add(veiculo);
     }
@@ -84,6 +75,4 @@ public class Cliente {
     public void setVeiculos(ArrayList<Veiculo> veiculos) {
         this.veiculos = veiculos;
     }
-    
-    
 }

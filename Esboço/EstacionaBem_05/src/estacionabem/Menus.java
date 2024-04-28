@@ -1,19 +1,21 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package estacionabem;
 
 import javax.swing.JOptionPane;
 
 /**
  *
- * @author breno
+ * @author BRENO TAKESHI CAMARGO DA SILVA MAEDA
+ * @author GABRIEL FELIPE BARBOSA
+ * 
  */
+
 public class Menus {
     
     public int menuPrincipal(){
         String menu = "";
+        String entrada = "";
+        int op = 0;
+        
         menu += "Escolha uma opção:\n";
         menu += "1- Gerenciar Clientes\n";
         menu += "2 - Gerenciar vagas\n";
@@ -22,12 +24,29 @@ public class Menus {
         menu += "5 - Consultar total faturado em um período\n";
         menu += "6 - Sair do programa\n";        
         
-        int op = Integer.parseInt(JOptionPane.showInputDialog(null,menu, "numero de 1 a 6"));
+        entrada = JOptionPane.showInputDialog(null,menu, "numero de 1 a 6");
+        
+        if(entrada != null){
+            
+            if(entrada.matches("1") || entrada.matches("2") || entrada.matches("3") || entrada.matches("4") || entrada.matches("5") || entrada.matches("6")) {
+               
+                op = Integer.parseInt(entrada);
+            
+            } else {
+               
+                JOptionPane.showMessageDialog(null, "Por favor, insira apenas números.");
+            }
+        }
+        
+        
         return op;
     }
     
     public int menuGerenciarClientes(){
         String menu = "";
+        String entrada;
+        int op = 0;
+        
         menu += "1 - Cadastrar\n";
         menu += "2 - Consultar por documento\n";
         menu += "3 - Excluir\n";
@@ -36,23 +55,43 @@ public class Menus {
         menu += "6 - Listar todos os cadastros\n";
         menu += "7 - Voltar\n";
 
-        int op = Integer.parseInt(JOptionPane.showInputDialog(null, menu, "numero de 1 a 7", JOptionPane.INFORMATION_MESSAGE));
+        entrada = JOptionPane.showInputDialog(null,menu, "numero de 1 a 6");
+        
+        if(entrada.matches("1") || entrada.matches("2") || entrada.matches("3") || entrada.matches("4") || entrada.matches("5") || entrada.matches("6")) {
+            op = Integer.parseInt(entrada);
+            
+        } else {
+             JOptionPane.showMessageDialog(null, "Por favor, insira apenas números.");
+        }
         return op;
     }
     
     public int menuGerenciarVeiculos(){
         String menu = "";
+        String entrada;
+        int op = 0;
+        
         menu += "1 - Cadastrar novo veiculo\n";
         menu += "2 - Excluir\n";
         menu += "3 - Editar\n";
         menu += "4 - Voltar\n";
 
-        int op = Integer.parseInt(JOptionPane.showInputDialog(null, menu, "numero de 1 a 4", JOptionPane.INFORMATION_MESSAGE));
+        entrada = JOptionPane.showInputDialog(null,menu, "numero de 1 a 6");
+        
+        if(entrada.matches("1") || entrada.matches("2") || entrada.matches("3") || entrada.matches("4") || entrada.matches("5") || entrada.matches("6")) {
+            op = Integer.parseInt(entrada);
+            
+        } else {
+             JOptionPane.showMessageDialog(null, "Por favor, insira apenas números.");
+        }
         return op;
     }
     
     public int menuGerenciarVagas(){
         String menu = "";
+        String entrada;
+        int op = 0;
+        
         menu += "1 - Cadastrar\n";
         menu += "2 - Consultar por número\n";
         menu += "3 - Excluir\n";
@@ -61,21 +100,36 @@ public class Menus {
         menu += "6- Voltar\n";
         menu += "\n";
         
-        int op = Integer.parseInt(JOptionPane.showInputDialog(null, menu, "numero de 1 a 6", JOptionPane.INFORMATION_MESSAGE));
+        entrada = JOptionPane.showInputDialog(null,menu, "numero de 1 a 6");
+        
+        if(entrada.matches("1") || entrada.matches("2") || entrada.matches("3") || entrada.matches("4") || entrada.matches("5") || entrada.matches("6")) {
+            op = Integer.parseInt(entrada);
+            
+        } else {
+             JOptionPane.showMessageDialog(null, "Por favor, insira apenas números.");
+        }
         return op;
     }
     
     public int menuGerenciarEstacionamento(){
         String menu= "";
+        String entrada;
+        int op = 0;
+        
         menu += "1 - Estacionar\n";
         menu += "2 - Retirar\n";
         menu += "3 - Listar todas as vagas disponíveis\n";
         menu += "4 - Gerenciar tarifas\n";
         menu += "5 - Voltar\n";
         
-        int op = Integer.parseInt(JOptionPane.showInputDialog(null, menu, "numero de 1 a 5", JOptionPane.INFORMATION_MESSAGE));
+        entrada = JOptionPane.showInputDialog(null,menu, "numero de 1 a 6");
+        
+        if(entrada.matches("1") || entrada.matches("2") || entrada.matches("3") || entrada.matches("4") || entrada.matches("5") || entrada.matches("6")) {
+            op = Integer.parseInt(entrada);
+            
+        } else {
+             JOptionPane.showMessageDialog(null, "Por favor, insira apenas números.");
+        }
         return op;
     }
-    
-    
 }
