@@ -38,7 +38,7 @@ public class OperacaoTotalFaturado {
         
         do {
             
-            strFim = JOptionPane.showInputDialog(null, "Digite o fim do período: ", "DD/MM/05AAAA");
+            strFim = JOptionPane.showInputDialog(null, "Digite o fim do período: ", "DD/MM/AAAA");
              
             if(!validarData(strFim)) {
                 JOptionPane.showMessageDialog(null, "Insira uma data de Fim no formato Dia/Mes/Ano");

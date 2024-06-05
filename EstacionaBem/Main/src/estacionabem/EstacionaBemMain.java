@@ -68,7 +68,7 @@ public class EstacionaBemMain {
                 } else if(opSecundaria == 6){
                     operacoesEstacionamento.getOpCliente().listaCadastros(clientes);
                 } else if(opSecundaria == 7){
-
+                      JOptionPane.showMessageDialog(null, "Voltando para o Menu Principal!!", "Estaciona Bem", JOptionPane.INFORMATION_MESSAGE);  
                 } else{
                 JOptionPane.showMessageDialog(null, "Opção Inválida!", "Estaciona Bem", JOptionPane.ERROR_MESSAGE);
                 }
@@ -88,7 +88,7 @@ public class EstacionaBemMain {
                 } else if(opSecundaria == 5){
                    operacoesEstacionamento.getOpVaga().operacaoAlteraDisponibilidade(vagas, tickets);
                 } else if(opSecundaria == 6){
-
+                    JOptionPane.showMessageDialog(null, "Voltando para o Menu Principal!!", "Estaciona Bem", JOptionPane.INFORMATION_MESSAGE); 
                 } else{
                    JOptionPane.showMessageDialog(null, "Opção Inválida!", "Estaciona Bem", JOptionPane.ERROR_MESSAGE);
                 }
@@ -107,7 +107,7 @@ public class EstacionaBemMain {
                     } else if(opSecundaria == 4){
                         operacoesEstacionamento.getOpEstacionar().gerenciarTarifa(valores);
                     } else if(opSecundaria == 5){
-
+                        JOptionPane.showMessageDialog(null, "Voltando para o Menu Principal!!", "Estaciona Bem", JOptionPane.INFORMATION_MESSAGE); 
                     } else{
                         JOptionPane.showMessageDialog(null, "Opção Inválida!", "Estaciona Bem", JOptionPane.ERROR_MESSAGE);
                     }

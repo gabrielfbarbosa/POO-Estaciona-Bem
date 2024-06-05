@@ -12,7 +12,7 @@ public class Vaga {
         this.numero = numero;
         this.rua = rua;
         this.tipo = tipo;
-        this.disponibilidade = "Disponivel";
+        this.disponibilidade = "disponivel";
     }
 
     

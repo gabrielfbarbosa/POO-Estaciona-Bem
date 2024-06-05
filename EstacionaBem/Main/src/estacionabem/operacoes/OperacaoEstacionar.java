@@ -44,7 +44,7 @@ public class OperacaoEstacionar {
             JOptionPane.showMessageDialog(null, "Vaga não encontrada!", "Estaciona Bem", JOptionPane.ERROR_MESSAGE);
         } else{
             
-            if(vaga.getDisponibilidade().equals("Disponivel") ){
+            if(vaga.getDisponibilidade().equals("disponivel") ){
                 String documento = JOptionPane.showInputDialog(null, "Digite o documento do cliente:", "123");
                 Cliente cliente = opCliente.buscaCliente(clientes, documento);
 
@@ -61,11 +61,11 @@ public class OperacaoEstacionar {
 
                         Ticket ticket;
                         do{
-                            String strTipo = JOptionPane.showInputDialog(null, "Como deseja gerar o ticket, Mensal ou Hora", "Mensal/Hora");
+                            String strTipo = JOptionPane.showInputDialog(null, "Como deseja gerar o ticket, Mensal ou Hora", "mensal ou hora");
                             strTipo = strTipo.toLowerCase();
                             if(strTipo.equals("mensal")){
                         
-                                ticket = new TicketMensalista(vaga, veiculo, TabelaValores.INTEGRAL.getValorHorasubsequenteMoto());
+                                ticket = new TicketMensalista(vaga, veiculo, TabelaValores.INTEGRAL.getValorIntegral());
                                 ticketsMensais.add( (TicketMensalista) ticket);
                                 break;
                             }
@@ -113,7 +113,7 @@ public class OperacaoEstacionar {
             ticketsFinalizados.add(ticketHorista);
             
             Vaga vaga = opVaga.buscaVaga(vagas, ticketHorista.getVaga().getNumero(), ticketHorista.getVaga().getRua());
-            vaga.setDisponibilidade("Disponivel");
+            vaga.setDisponibilidade("disponivel");
             
             JOptionPane.showMessageDialog(null, ticketHorista.toString());
         } else{
@@ -121,7 +121,7 @@ public class OperacaoEstacionar {
             ticketsFinalizados.add(ticketMensalista);
             
             Vaga vaga = opVaga.buscaVaga(vagas, ticketMensalista.getVaga().getNumero(), ticketMensalista.getVaga().getRua());
-            vaga.setDisponibilidade("Disponivel");
+            vaga.setDisponibilidade("disponivel");
             
             JOptionPane.showMessageDialog(null, ticketMensalista.toString());
         }
@@ -134,7 +134,7 @@ public class OperacaoEstacionar {
         saida += "---Lista de vagas---\n";
         for(Vaga vaga : vagas){
 
-            if(vaga.getDisponibilidade().equals("Disponivel"))
+            if(vaga.getDisponibilidade().equals("disponivel"))
                 saida += "*-*Vaga: \n" + vaga.toString();
             
         }
@@ -144,7 +144,7 @@ public class OperacaoEstacionar {
     /*4 - Gerenciar Tarifas================================*/
     public void gerenciarTarifa(TabelaValores[] dias){
         int numDia = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite qual o dia que você quer gerenciar: 1-domingo, 2-segunda.... até 7-sabado", "Numero de 1 a 7"));
-        String tipo = JOptionPane.showInputDialog(null, "Qual o tipo da vaga: ", "Moto ou Carro");
+        String tipo = JOptionPane.showInputDialog(null, "Qual o tipo da vaga: ", "moto, carro ou onibus");
         
         if(tipo.equals("Moto") && numDia > 0 && numDia < 8){
             int novoPrimeiro = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite qual o novo valor da primeira hora:"));
@@ -157,7 +157,7 @@ public class OperacaoEstacionar {
             dias[numDia].setValorPrimeiraHoraCarro(novoPrimeiro);
             dias[numDia].setValorHorasubsequenteCarro(novoSegundo);
         } else{
-            JOptionPane.showMessageDialog(null, "Tipo inválido, confira se você digitou Moto ou Carro corretamente, Ou Dia inválido!", "Estaciona Bem", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Tipo inválido, confira se você digitou moto, carro ou onibus corretamente, Ou Dia inválido!", "Estaciona Bem", JOptionPane.ERROR_MESSAGE);
         }
         
         JOptionPane.showMessageDialog(null, "Gerenciamento concluido com sucesso!!", "Estaciona Bem", JOptionPane.INFORMATION_MESSAGE);

@@ -29,7 +29,7 @@ public class OperacaoVeiculo {
         int continuar = JOptionPane.YES_OPTION;
         while(continuar == JOptionPane.YES_OPTION){
             JOptionPane.showMessageDialog(null, cliente.listaVeiculos(cliente.getVeiculos()), "Lista de Veiculos", JOptionPane.INFORMATION_MESSAGE);
-            String strTipo = JOptionPane.showInputDialog(null, "Digite o tipo do veiculo", "Moto ou Carro");
+            String strTipo = JOptionPane.showInputDialog(null, "Digite o tipo do veiculo", "moto, carro ou onibus");
             String placa = JOptionPane.showInputDialog(null, "Digite a Placa do veiculo", "Placa X");
             
             /*verifica se já existe a placa cadastrada para todos os veiculos*/
@@ -46,7 +46,7 @@ public class OperacaoVeiculo {
                     Tipo tipo = Tipo.converteString(strTipo);
                     novoVeiculo = new Veiculo(placa, cliente, tipo);
                 } else{
-                    JOptionPane.showMessageDialog(null, "Tipo de veículo inválido, verifique se digitou corretamente Motou ou Carro!!", "Gerenciar Veiculos", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Tipo de veículo inválido, verifique se digitou corretamente moto, carro ou onibus!!", "Gerenciar Veiculos", JOptionPane.ERROR_MESSAGE);
                     continue;
                 }
                 cliente.adicionaVeiculo(novoVeiculo);
@@ -134,7 +134,7 @@ public class OperacaoVeiculo {
                         JOptionPane.showMessageDialog(null, "Veiculo Alterado");
                     }
                 } else{
-                    JOptionPane.showMessageDialog(null, "Tipo de veículo inválido, verifique se digitou corretamente Motou ou Carro!!", "Gerenciar Veiculos", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Tipo de veículo inválido, verifique se digitou corretamente moto, carro ou onibus!!", "Gerenciar Veiculos", JOptionPane.ERROR_MESSAGE);
 
                 }
                 

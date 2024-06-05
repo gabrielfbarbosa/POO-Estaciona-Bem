@@ -17,7 +17,7 @@ public class Menus {
         menu += "5 - Consultar total faturado em um período\n";
         menu += "6 - Sair do programa\n";        
         
-        entrada = JOptionPane.showInputDialog(null,menu, "numero de 1 a 6");
+        entrada = JOptionPane.showInputDialog(null,menu, "1 a 6");
         
             
         if(entrada.matches("1") || entrada.matches("2") || entrada.matches("3") || entrada.matches("4") || entrada.matches("5") || entrada.matches("6")) {
@@ -26,7 +26,7 @@ public class Menus {
 
         } else {
 
-            JOptionPane.showMessageDialog(null, "Por favor, insira apenas números.");
+            JOptionPane.showMessageDialog(null, "Por favor, insira apenas números de 1 a 7.");
         }
         
         
@@ -46,13 +46,13 @@ public class Menus {
         menu += "6 - Listar todos os cadastros\n";
         menu += "7 - Voltar\n";
 
-        entrada = JOptionPane.showInputDialog(null,menu, "numero de 1 a 6");
+        entrada = JOptionPane.showInputDialog(null,menu, "1 a 7");
         
-        if(entrada.matches("1") || entrada.matches("2") || entrada.matches("3") || entrada.matches("4") || entrada.matches("5") || entrada.matches("6")) {
+        if(entrada.matches("1") || entrada.matches("2") || entrada.matches("3") || entrada.matches("4") || entrada.matches("5") || entrada.matches("6") || entrada.matches("7")) {
             op = Integer.parseInt(entrada);
             
         } else {
-             JOptionPane.showMessageDialog(null, "Por favor, insira apenas números.");
+             JOptionPane.showMessageDialog(null, "Por favor, insira apenas números de 1 a 7.");
         }
         return op;
     }
@@ -67,13 +67,13 @@ public class Menus {
         menu += "3 - Editar\n";
         menu += "4 - Voltar\n";
 
-        entrada = JOptionPane.showInputDialog(null,menu, "numero de 1 a 6");
+        entrada = JOptionPane.showInputDialog(null,menu, "1 a 4");
         
         if(entrada.matches("1") || entrada.matches("2") || entrada.matches("3") || entrada.matches("4") || entrada.matches("5") || entrada.matches("6")) {
             op = Integer.parseInt(entrada);
             
         } else {
-             JOptionPane.showMessageDialog(null, "Por favor, insira apenas números.");
+             JOptionPane.showMessageDialog(null, "Por favor, insira apenas números de 1 a 4.");
         }
         return op;
     }
@@ -91,13 +91,13 @@ public class Menus {
         menu += "6- Voltar\n";
         menu += "\n";
         
-        entrada = JOptionPane.showInputDialog(null,menu, "numero de 1 a 6");
+        entrada = JOptionPane.showInputDialog(null,menu, "1 a 6");
         
         if(entrada.matches("1") || entrada.matches("2") || entrada.matches("3") || entrada.matches("4") || entrada.matches("5") || entrada.matches("6")) {
             op = Integer.parseInt(entrada);
             
         } else {
-             JOptionPane.showMessageDialog(null, "Por favor, insira apenas números.");
+             JOptionPane.showMessageDialog(null, "Por favor, insira apenas números de 1 a 6");
         }
         return op;
     }
@@ -113,13 +113,13 @@ public class Menus {
         menu += "4 - Gerenciar tarifas\n";
         menu += "5 - Voltar\n";
         
-        entrada = JOptionPane.showInputDialog(null,menu, "numero de 1 a 6");
+        entrada = JOptionPane.showInputDialog(null,menu, "1 a 6");
         
         if(entrada.matches("1") || entrada.matches("2") || entrada.matches("3") || entrada.matches("4") || entrada.matches("5") || entrada.matches("6")) {
             op = Integer.parseInt(entrada);
             
         } else {
-             JOptionPane.showMessageDialog(null, "Por favor, insira apenas números.");
+             JOptionPane.showMessageDialog(null, "Por favor, insira apenas números de 1 a 6.");
         }
         return op;
     }

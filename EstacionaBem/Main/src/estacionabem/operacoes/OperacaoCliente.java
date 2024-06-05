@@ -199,7 +199,7 @@ public class OperacaoCliente {
                         opVeiculo.alterarVeiculo(cliente, tickets);
                         break;
                     case 4:
-
+                        JOptionPane.showMessageDialog(null, "Voltando para o Menu Principal!!", "Estaciona Bem", JOptionPane.INFORMATION_MESSAGE); 
                         break;
                     default:
                         JOptionPane.showMessageDialog(null, "Opção invalida!!", "Estaciona Bem", JOptionPane.ERROR_MESSAGE);

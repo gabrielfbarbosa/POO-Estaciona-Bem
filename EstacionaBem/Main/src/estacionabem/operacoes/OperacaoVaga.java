@@ -38,7 +38,7 @@ public class OperacaoVaga {
             /*verifica se existe a vaga no ArrayList de vagas*/
             if(vaga == null){
 
-                String strTipo = JOptionPane.showInputDialog(null, "Digite o tipo da nova vaga", "Moto ou Carro");
+                String strTipo = JOptionPane.showInputDialog(null, "Digite o tipo da nova vaga", "moto, carro ou onibus");
 
                 /* Caso o usuario escrever de forma diferente da varificação em letra minuscula */
                 strTipo = !strTipo.isEmpty() ? strTipo.toLowerCase() : "";
@@ -67,7 +67,7 @@ public class OperacaoVaga {
 
                 }else{
 
-                    JOptionPane.showMessageDialog(null, "Tipo de vaga inválido, verifique se digitou corretamente Motou ou Carro!!", "Gerenciar Veiculos", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Tipo de vaga inválido, verifique se digitou corretamente moto, carro ou onibus!!", "Gerenciar Veiculos", JOptionPane.ERROR_MESSAGE);
                 }
             } else{
 
@@ -120,12 +120,12 @@ public class OperacaoVaga {
         } else if(ticketCadastrado){
             JOptionPane.showMessageDialog(null, "Não é possível remover Vaga, ele ainda possui Ticket Ativado!!", "Gerenciar Veiculos", JOptionPane.ERROR_MESSAGE);            
         } else{
-     
-            if(vaga.getDisponibilidade().equals("disponivel") ){
+            JOptionPane.showMessageDialog(null, "Entrou ", "Estaciona Bem", JOptionPane.INFORMATION_MESSAGE);
+            if(vaga.getDisponibilidade().equals("disponivel") || vaga.getDisponibilidade().equals("indisponivel")){
                 vagas.remove(vaga);
-                
-            JOptionPane.showMessageDialog(null, "Vaga Excluído com sucesso!!", "Estaciona Bem", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Vaga Excluída com sucesso!!", "Estaciona Bem", JOptionPane.INFORMATION_MESSAGE);
             }
+            JOptionPane.showMessageDialog(null, "saiu ", "Estaciona Bem", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
@@ -158,14 +158,14 @@ public class OperacaoVaga {
             
             /*Verifica se vai alterar o tipo da vaga*/
             if(alteracao == JOptionPane.YES_OPTION){
-                String strTipo = JOptionPane.showInputDialog(null, "Digite o novo tipo de vaga: ", "Moto ou Carro");
+                String strTipo = JOptionPane.showInputDialog(null, "Digite o novo tipo de vaga: ", "moto, carro ou onibus");
                 
                 /*Verifica o tipo da vaga*/
                 if(strTipo.equals("moto") || strTipo.equals("caro") || strTipo.equals("onibus")){
                     Tipo tipo = Tipo.converteString(strTipo);
                     vaga.setTipo(tipo);
                 } else{
-                    JOptionPane.showMessageDialog(null, "Tipo inválido, confira se você escreveu corretamente Moto ou Carro!!", "Estaciona Bem", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Tipo inválido, confira se você escreveu corretamente moto, carro ou onibus!!", "Estaciona Bem", JOptionPane.ERROR_MESSAGE);
                 }
             }
            
